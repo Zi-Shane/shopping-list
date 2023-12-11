@@ -1,0 +1,21 @@
+.shoppingList {
+  max-width: 350px;
+  margin: 0px auto;
+  /* position: relative; */
+  display: block;
+  /* background: #fff; */
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
+}
+
+.item {
+  display: flex;
+  height: 40px;
+  padding: 0px 20px;
+  align-items: center;
+  list-style: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
