@@ -1,0 +1,33 @@
+.items {
+  max-width: 350px;
+  height: 320px;
+  margin: 0px auto;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  height: 40px;
+  padding: 0px 20px;
+  align-items: center;
+  list-style: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.value {
+  flex-grow: 1;
+}
+
+.value.strike {
+  text-decoration: line-through;
+  color: #c9c9c9;
+}
+
+.close {
+  padding: 0.25em;
+}
