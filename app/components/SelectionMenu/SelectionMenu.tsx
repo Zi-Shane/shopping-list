@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import { useFetchSuggestion } from 'hooks';
+import { useTimeoutFetch } from '@/hooks/SelectionMenu/useTimeoutFetch';
 
 type SelectionMenuProps = {
   addItem: (item: string) => void;
@@ -9,7 +10,7 @@ type SelectionMenuProps = {
 export function SelectionMenu({ addItem }: SelectionMenuProps) {
   const [keyword, setKeyword] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const suggestions = useFetchSuggestion(keyword);
+  const suggestions = useTimeoutFetch(keyword);
 
   useEffect(() => {
     if (suggestions.length > 0) {
