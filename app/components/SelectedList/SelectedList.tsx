@@ -1,34 +1,54 @@
 import styles from './styles.module.css';
-import { item } from '../ShoppingList';
+import { itemsDict } from '../ShoppingList';
 
 type SelectedListProps = {
-  items: item[];
-  strikeToggle: (id: string) => void;
-  removeItem: (id: string) => void;
+  items: itemsDict;
+  strikeToggle: (name: string) => void;
+  removeItem: (name: string) => void;
+  changeAmount: (name: string, add: boolean) => void;
 };
 
 export function SelectedList({
   items,
   strikeToggle,
   removeItem,
+  changeAmount,
 }: SelectedListProps) {
   return (
     <div className={styles.items}>
-      {items.map(item => {
+      {Object.keys(items).map(name => {
         return (
-          <div className={styles.item} key={item.id}>
+          <div className={styles.item} key={name}>
             <span
               className={`${styles.value} ${
-                item.checked ? styles.strike : ''
+                items[name].checked ? styles.strike : ''
               }`}
-              onClick={() => strikeToggle(item.id)}
+              onClick={() => strikeToggle(name)}
             >
-              {item.name}
+              {name}
             </span>
+
             <div
-              className={styles.close}
-              onClick={() => removeItem(item.id)}
+              className={`${styles.wrapper} ${
+                items[name].checked ? styles.disabled : ''
+              }`}
             >
+              <span
+                className={styles.minus}
+                onClick={() => changeAmount(name, false)}
+              >
+                -
+              </span>
+              <span className={styles.num}>{items[name].amount}</span>
+              <span
+                className={styles.plus}
+                onClick={() => changeAmount(name, true)}
+              >
+                +
+              </span>
+            </div>
+
+            <div className={styles.close} onClick={() => removeItem(name)}>
               &times;
             </div>
           </div>

@@ -31,3 +31,33 @@
 .close {
   padding: 0.25em;
 }
+
+.wrapper {
+  height: 30px;
+  min-width: 5em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+}
+
+.wrapper.disabled {
+  color: #969696;
+  background-color: #c9c9c9;
+  pointer-events: none;
+}
+
+.minus,
+.plus {
+  text-align: center;
+  padding: 0.2em;
+  cursor: pointer;
+}
+
+.num {
+  min-width: 2em;
+  text-align: center;
+  cursor: default;
+}

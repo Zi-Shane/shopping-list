@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import { useFetchSuggestion } from 'hooks';
-import { useTimeoutFetch } from '@/hooks/SelectionMenu/useTimeoutFetch';
+import { useTimeoutFetch } from 'hooks';
 
 type SelectionMenuProps = {
   addItem: (item: string) => void;
