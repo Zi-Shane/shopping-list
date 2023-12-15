@@ -11,9 +11,7 @@ export type itemsDict = {
 };
 
 export function ShoppingList() {
-  const [items, setItems] = useState<itemsDict>({
-    test: { checked: false, amount: 1 },
-  });
+  const [items, setItems] = useState<itemsDict>({});
 
   function addItem(name: string) {
     setItems(prev => ({ ...prev, [name]: { checked: false, amount: 1 } }));
