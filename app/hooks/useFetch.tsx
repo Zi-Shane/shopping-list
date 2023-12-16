@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useFetchSuggestion(keyword: string): string[] {
+export function useFetch(keyword: string): string[] {
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   useEffect(() => {

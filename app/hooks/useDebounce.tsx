@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export function useTimeoutFetch(keyword: string): string[] {
+export function useDebounce(keyword: string): string[] {
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const fetchData = useCallback(() => {

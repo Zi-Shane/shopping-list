@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.css';
-import { useFetchSuggestion } from 'hooks';
-import { useTimeoutFetch } from 'hooks';
+import { useDebounce, useFetch } from 'hooks';
 
 type SelectionMenuProps = {
   addItem: (item: string) => void;
@@ -11,7 +10,8 @@ export function SelectionMenu({ addItem }: SelectionMenuProps) {
   const [keyword, setKeyword] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(0);
-  const suggestions = useTimeoutFetch(keyword);
+  const suggestions = useDebounce(keyword);
+  // const suggestions = useFetch(keyword);
   const menuRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
