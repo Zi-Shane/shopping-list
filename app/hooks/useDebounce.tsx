@@ -1,17 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
+import { getSuggestions } from 'API';
 
 export function useDebounce(keyword: string): string[] {
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const fetchData = useCallback(() => {
     if (keyword.length > 0) {
-      fetch(`https://api.frontendeval.com/fake/food/${keyword}`)
-        .then(res => res.json())
-        .then(data => setSuggestions(data))
-        .catch(err => {
-          if (err.name === 'AbortError') return;
-          console.error(err);
-        });
+      getSuggestions(keyword).then(data => setSuggestions(data));
     } else {
       setSuggestions([]);
     }
