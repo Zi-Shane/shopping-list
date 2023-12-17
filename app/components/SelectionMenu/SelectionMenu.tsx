@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.css';
-import { useDebounce, useFetch } from 'hooks';
+import { useDebounce, useKeyPress } from 'hooks';
 
 type SelectionMenuProps = {
   addItem: (item: string) => void;
@@ -11,9 +11,31 @@ export function SelectionMenu({ addItem }: SelectionMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(0);
   const suggestions = useDebounce(keyword);
-  // const suggestions = useFetch(keyword);
   const menuRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+
+  const pressArrows = (key: string) => {
+    if (!isOpen) setIsOpen(true);
+    const newIndex = highlightIndex + (key === 'ArrowDown' ? 1 : -1);
+    if (newIndex >= 0 && newIndex < suggestions.length) {
+      listRef.current?.children[newIndex].scrollIntoView({
+        block: 'nearest',
+      });
+      setHighlightIndex(newIndex);
+    }
+  };
+
+  const addAndClose = () => {
+    if (suggestions.length > 0) {
+      setIsOpen(prev => !prev);
+      addItem(suggestions[highlightIndex]);
+    }
+  };
+
+  useKeyPress('Enter', addAndClose);
+  useKeyPress('Escape', () => setIsOpen(false));
+  useKeyPress('ArrowDown', () => pressArrows('ArrowDown'));
+  useKeyPress('ArrowUp', () => pressArrows('ArrowUp'));
 
   useEffect(() => {
     if (suggestions.length > 0) {
@@ -26,39 +48,6 @@ export function SelectionMenu({ addItem }: SelectionMenuProps) {
   useEffect(() => {
     if (isOpen) setHighlightIndex(0);
   }, [isOpen]);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      switch (e.code) {
-        case 'Enter': {
-          setIsOpen(prev => !prev);
-          addItem(suggestions[highlightIndex]);
-          break;
-        }
-        case 'Escape': {
-          if (isOpen) setIsOpen(false);
-          break;
-        }
-        case 'ArrowUp':
-        case 'ArrowDown': {
-          if (!isOpen) setIsOpen(true);
-          const newIndex =
-            highlightIndex + (e.code === 'ArrowDown' ? 1 : -1);
-          if (newIndex >= 0 && newIndex < suggestions.length) {
-            listRef.current?.children[newIndex].scrollIntoView({
-              block: 'nearest',
-            });
-            setHighlightIndex(newIndex);
-          }
-          break;
-        }
-      }
-    };
-    menuRef.current?.addEventListener('keydown', handler);
-    return () => {
-      menuRef.current?.removeEventListener('keydown', handler);
-    };
-  }, [addItem, highlightIndex, isOpen, suggestions]);
 
   return (
     <div

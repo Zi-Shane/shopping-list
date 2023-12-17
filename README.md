@@ -6,7 +6,7 @@ A react shoppinglist applicaion.
 
 - Using Debounce to control fetch data from API.
 - Can multi-select items then `FocusOut` to hide, `Click` to show dropdown list.
-- Support Keyboard event:
+- Support Keyboard event (`useKeyPress` hook):
   - `ArrowUp`, `ArrowDown`: open and select item in menu
   - `Enter`: add to shopping list
   - `Escape`: close dropdown menu
