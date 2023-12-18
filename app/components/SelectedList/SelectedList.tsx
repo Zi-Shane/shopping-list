@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import { itemsDict } from '../ShoppingList';
+import { itemsDict } from 'hooks';
 
 type SelectedListProps = {
   items: itemsDict;

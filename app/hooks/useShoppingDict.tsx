@@ -5,7 +5,7 @@ type item = {
   amount: number;
 };
 
-type itemsDict = {
+export type itemsDict = {
   [name: string]: item;
 };
 
