@@ -32,6 +32,11 @@ export function SelectionMenu({ addItem }: SelectionMenuProps) {
     }
   };
 
+  useKeyPress('ShiftRight', () =>
+    (
+      menuRef.current?.children.namedItem('itemInput') as HTMLInputElement
+    ).focus(),
+  );
   useKeyPress('Enter', addAndClose);
   useKeyPress('Escape', () => setIsOpen(false));
   useKeyPress('ArrowDown', () => pressArrows('ArrowDown'));
@@ -60,6 +65,7 @@ export function SelectionMenu({ addItem }: SelectionMenuProps) {
       <h1>Shopping List</h1>
       <input
         className={styles.selectInput}
+        id="itemInput"
         value={keyword}
         onChange={e => setKeyword(e.target.value)}
       />
