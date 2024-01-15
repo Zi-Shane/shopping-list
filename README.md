@@ -1,5 +1,7 @@
 # ShoppingList
 
+[Demo](https://zi-shane.github.io/shopping-list/)
+
 A react shoppinglist applicaion.
 
 ## Features
